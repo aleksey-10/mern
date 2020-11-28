@@ -1,0 +1,5 @@
+{
+  "jwtSecret": "superpower",
+  "port": 5000,
+  "mongoUri": "mongodb+srv://aleksey:qwerty_20@cluster0.uso1o.mongodb.net/test?retryWrites=true&w=majority"
+}

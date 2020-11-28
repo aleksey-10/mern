@@ -1,0 +1,13 @@
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 32px 48px;
+}
+
+.header {
+  background-color: #f9f9f9;
+}
+
+.offset-none {
+  margin-bottom: 0;
+}
