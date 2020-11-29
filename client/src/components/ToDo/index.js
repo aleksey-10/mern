@@ -1,6 +1,7 @@
 import { Checkbox, Col, Input, List, message, Row, Spin } from "antd";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useHttp } from "../../hooks/https.hooks";
+import { AuthContext } from '../../context/AuthContext';
 import styles from './styles.module.css';
 
 export const ToDo = () => {
@@ -8,14 +9,17 @@ export const ToDo = () => {
   const { loading, request } = useHttp();
   const [todos, setTodos] = useState([]);
   const [todosFetching, setTodosFetching] = useState(true);
+  const { userId } = useContext(AuthContext);
 
   useEffect(() => {
-    request('/api/todo/fetch')
-      .then(response => {
-        setTodos(response.todos);
-        setTodosFetching(false);
-      });
-  }, [request]);
+    if (userId) {
+      request('/api/todo/fetch', 'POST', { userId })
+        .then(response => {
+          setTodos(response.todos);
+          setTodosFetching(false);
+        });
+    }
+  }, [request, userId]);
 
   const handleChange = useCallback((event) => {
     setInput(event.target.value);
@@ -24,13 +28,13 @@ export const ToDo = () => {
   const handleKeyPress = useCallback((event) => {
     if (event.key === 'Enter' && input) {
       const newTodo = { title: input.trim(), completed: false };
-      request('/api/todo/create', 'POST', newTodo)
+      request('/api/todo/create', 'POST', { ...newTodo, userId })
         .then((response) => {
           message.success(response.message);
           setTodos(prevTodos => [...prevTodos, { ...newTodo, id: response.todoId }])
         })
     }
-  }, [input, request]);
+  }, [input, request, userId]);
 
   return (
     <div className={styles.wrapper}>

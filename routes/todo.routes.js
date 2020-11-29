@@ -6,23 +6,23 @@ const Todo = require('../models/Todo.models');
 
 router.post('/create', async (req, res) => {
   try {
-    const { title, completed } = req.body;
+    const { title, completed, userId } = req.body;
 
-    const todo = new Todo({ title, completed })
+    const todo = new Todo({ title, completed, owner: userId })
 
     await todo.save();
 
-    res.json({ message: 'Todo successfully saved', todoId: todo.id });
+    res.status(201).json({ message: 'Todo successfully saved', todoId: todo.id });
   } catch {
     res.status(500).json({ message: 'Server error' });
   }
 });
 
-router.get('/fetch', async (req, res) => {
+router.post('/fetch', async (req, res) => {
   try {
-    const { title, completed } = req.body;
+    const { userId } = req.body;
 
-    const todos = await Todo.find();
+    const todos = await Todo.find({ owner: userId });
 
     res.json({ todos });
   } catch {
