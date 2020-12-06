@@ -1,8 +1,10 @@
-import { SearchOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Input } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import { Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useHttp } from '../../hooks/https.hooks';
 import { Loader } from '../Loader';
+import styles from './styles.module.css';
+import { List } from './components/List';
 
 export const People = () => {
   const {loading, request} = useHttp();
@@ -16,14 +18,10 @@ export const People = () => {
 
   return (
     <div>
-      <Input prefix={<SearchOutlined />} />
+      <Input prefix={<SearchOutlined />} className={styles.input} />
       {loading
         ? <Loader />
-        : people.map(({ _id, username }) => (
-          <div key={_id} style={{ margin: '16px 0'}}>
-            <Avatar icon={<UserOutlined />} size="large" /> {username}
-          </div>
-        ))
+        : <List people={people} />
       }
     </div>
   );

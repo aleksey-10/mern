@@ -4,6 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { Login } from '../Login';
 import { Menu } from '../Menu';
 import { People } from '../People';
+import { Profile } from '../Profile';
 import { Register } from '../Register';
 import { ToDo } from '../ToDo';
 
@@ -33,6 +34,9 @@ export const Pages = ({ isAuthenticated }) => {
       </Layout.Sider>
       <Layout.Content className="container">
         <Switch>
+          <Route path="/people/:username">
+            <Profile />
+          </Route>
           <Route path="/people" exact>
             <People />
           </Route>

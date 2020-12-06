@@ -9,13 +9,13 @@ import { Header } from './components/Header';
 import { Layout } from 'antd';
 
 function App() {
-  const { login, logout, token, userId } = useAuth();
+  const { login, logout, token, userId, username } = useAuth();
   const isAuthenticated = !!token;
 
   return (
     <div className="App">
       <Router>
-        <AuthContext.Provider value={{ login, logout, token, userId }}>
+        <AuthContext.Provider value={{ login, logout, token, userId, username }}>
           <Header isAuthenticated={isAuthenticated} logout={logout} />
           <div className="content">
             <Pages isAuthenticated={isAuthenticated} />

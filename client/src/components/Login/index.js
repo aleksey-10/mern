@@ -23,7 +23,7 @@ export const Login = () => {
     form.validateFields().then(({ username, password }) => {
       request('/api/auth/login', 'POST', { username, password })
         .then(({ token, userId }) => {
-          auth.login(token, userId);
+          auth.login(token, userId, username);
         });
     })
   }, [request, form, auth]);
