@@ -50,7 +50,7 @@ export const Login = () => {
         name="password"
         rules={[{ required: true, message: 'Please input your password!' }]}
       >
-        <Input.Password placeholder="Enter your password" />
+        <Input type="password" placeholder="Enter your password" />
       </Form.Item>
 
       <Form.Item {...tailLayout} name="remember" valuePropName="checked">

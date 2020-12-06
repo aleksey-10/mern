@@ -31,7 +31,7 @@ export const ToDo = () => {
       request('/api/todo/create', 'POST', { ...newTodo, userId })
         .then((response) => {
           message.success(response.message);
-          setTodos(prevTodos => [...prevTodos, { ...newTodo, id: response.todoId }])
+          setTodos(prevTodos => [...prevTodos, { ...newTodo }])
         })
     }
   }, [input, request, userId]);
@@ -52,8 +52,8 @@ export const ToDo = () => {
           </div>
         ) : (
           <List bordered>
-            {todos.map(({ id, title, completed }) => (
-              <List.Item key={id}>
+            {todos.map(({ _id, title, completed }) => (
+              <List.Item key={_id}>
                 <Row gutter={8}>
                   <Col>
                     <Checkbox checked={completed} />

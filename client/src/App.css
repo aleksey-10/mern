@@ -1,11 +1,30 @@
+.App {
+  height: 100%;
+}
+
+.ant-layout,
+.ant-layout-sider {
+  background-color: #ffffff;
+}
+
+.ant-layout-has-sider {
+  height: 100%;
+}
+
+.ant-layout-header,
+.ant-layout-footer {
+  background-color: #f0f9ff;
+  height: 64px;
+}
+
+.content {
+  height: calc(100% - 128px);
+}
+
 .container {
   max-width: 1440px;
   margin: 0 auto;
   padding: 32px 48px;
-}
-
-.header {
-  background-color: #f9f9f9;
 }
 
 .offset-none {
